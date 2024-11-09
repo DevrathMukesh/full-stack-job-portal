@@ -3,10 +3,10 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/database.js";
-import userRoute from "./routes/userRoutes.js";
-import companyRoute from "./routes/companyRoutes.js";
-import jobRoute from "./routes/jobRoutes.js";
-import applicationRoute from "./routes/appRoutes.js";
+import userRoute from "./api/userRoutes.js";
+import companyRoute from "./api/companyRoutes.js";
+import jobRoute from "./api/jobRoutes.js";
+import applicationRoute from "./api/appRoutes.js";
 
 dotenv.config({});
 
@@ -17,11 +17,11 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
-    origin:'http://localhost:5173',
-    credentials:true
-}
-
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    credentials: true,
+};
 app.use(cors(corsOptions));
+
 
 const PORT = process.env.PORT || 3000;
 
